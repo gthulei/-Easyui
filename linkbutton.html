@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>linkbutton</title>
+  <link rel="stylesheet" type="text/css" href="./css/easyui.css">
+  <link rel="stylesheet" type="text/css" href="./css/icon.css">
+</head>
+<body>
+<a
+  id="btn_add"
+  href="#"
+  class="easyui-linkbutton"
+  data-options="iconCls:'icon-add'">增加部门</a><p>
+  <a
+    id="btn_find"
+    href="#"
+    class="easyui-linkbutton"
+    data-options="iconCls:'icon-search'">查询部门</a><p>
+  <a
+    id="btn_update"
+    href="#"
+    class="easyui-linkbutton"
+    data-options="iconCls:'icon-edit'">修改部门</a><p>
+  <a
+    id="btn_delete"
+    href="#"
+    class="easyui-linkbutton"
+    data-options="iconCls:'icon-remove'">删除部门</a><p>
+</body>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="./js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript">
+  $("a").click(function(){
+    var title = $(this).text();
+    title = $.trim(title);
+    alert(title);
+  });
+</script>
+
+</html>
