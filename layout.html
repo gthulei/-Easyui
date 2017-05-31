@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>layout</title>
+  <link rel="stylesheet" type="text/css" href="./css/easyui.css">
+  <link rel="stylesheet" type="text/css" href="./css/icon.css">
+</head>
+<body>
+
+  <div id="layout" class="easyui-layout" title="layout"  data-options="fit:true">
+    <!-- 区域面板--北边 -->
+    <div data-options="region:'north',title:'北边',split:true,border:true,iconCls:'icon-remove',collapsible:true" style="height:100px;">
+
+      <div class="easyui-layout" title="layout"  data-options="fit:true">
+      </div>
+    </div>
+
+    <!-- 区域面板--南边 -->
+    <div data-options="region:'south',title:'南边',split:true" style="height:100px;"></div>
+
+    <!-- 区域面板--东边 -->
+    <div data-options="region:'east',iconCls:'icon-reload',title:'东边',split:true" style="width:100px;"></div>
+
+    <!-- 区域面板--西边 -->
+    <div data-options="region:'west',title:'西边',split:true" style="width:100px;"></div>
+
+    <!-- 区域面板--中间 -->
+    <div data-options="region:'center',title:'中间'" style="padding:5px;background:#eee;">
+      <!--布局嵌套-->
+      <div class="easyui-layout" data-options="fit:true">
+
+        <!-- 西 -->
+        <div data-options="region:'west'" title="西" style="width:200px"></div>
+
+        <!-- 中 -->
+        <div data-options="region:'center'" title="中">
+
+          <div class="easyui-layout" data-options="fit:true">
+
+            <!-- 北 -->
+            <div data-options="region:'north'" title="北" style="height:100px"></div>
+
+            <!-- 中 -->
+            <div data-options="region:'center'" title="中"></div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="./js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript">
+
+  $(function () {
+    //easyui调用方法的语法如下：$('#layout').组件名('method','parameter');
+//    $("#layout").layout("collapse","north");
+//    window.setTimeout(function () {
+//      $("#layout").layout("collapse","south");
+//    },3000)
+  })
+
+</script>
+</html>
