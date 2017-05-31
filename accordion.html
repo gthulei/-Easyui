@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>accordion</title>
+  <link rel="stylesheet" type="text/css" href="./css/easyui.css">
+  <link rel="stylesheet" type="text/css" href="./css/icon.css">
+</head>
+<body>
+<!-- 容器 -->
+<div
+  id="accordionID"
+  class="easyui-accordion"
+  data-options="fit:false,border:true,animate:true,multiple:false,selected:-1"
+  style="width:300px;height:400px;">
+  <!-- 面板 -->
+  <div title="CMS" data-options="iconCls:'icon-back'" style="overflow:auto;padding:10px;">
+    北京
+  </div>
+  <div title="标题2" style="padding:10px;">
+    上海
+  </div>
+  <div title="标题3">
+    广州
+  </div>
+  <div title="标题4" data-options="collapsible:true">
+    深圳
+  </div>
+
+</div>
+</body>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="./js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript">
+  $(function () {
+    $("#accordionID").accordion("add",{
+      title: 'New Title',
+      content: 'New Content',
+      selected: false
+    });
+  })
+</script>
+</html>
