@@ -7,9 +7,88 @@
   <link rel="stylesheet" type="text/css" href="./css/icon.css">
 </head>
 <body>
-
+<div id="layout" class="easyui-layout" data-options="fit:true">
+  <div data-options="region:'north',split:false,collapsible:true,collapsible:false" style="height:150px;">
+    <div class="header"></div>
+  </div>
+  <div data-options="region:'west',title:'系统菜单',split:false,collapsible:false" style="width:200px;">
+    <ul id="tree" class="easyui-tree" data-options="lines:true">
+      <li>
+        <span>部门管理</span>
+        <ul>
+          <li>增加部门</li>
+          <li>删除部门</li>
+          <li>修改部门</li>
+          <li>查询部门</li>
+        </ul>
+      </li>
+      <li>
+        <span>人事管理</span>
+        <ul>
+          <li>招聘管理</li>
+          <li>人才存备</li>
+        </ul>
+      </li>
+      <li>
+        <span>客户管理</span>
+        <ul>
+          <li>阿里巴巴</li>
+          <li>腾讯</li>
+        </ul>
+      </li>
+      <li>
+        <span>权限管理</span>
+        <ul>
+          <li>用户权限</li>
+          <li>管理员权限</li>
+        </ul>
+      </li>
+      <li>
+        <span>报表管理</span>
+        <ul>
+          <li>财务报表</li>
+        </ul>
+      </li>
+      <li>
+        <span>帮助</span>
+        <ul>
+          <li>帮助中心</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div data-options="region:'center',split:false,collapsible:false" style="padding:5px;background:#eee;">
+    <!-- Tabs选项卡 -->
+    <div
+      id="tabsID"
+      class="easyui-tabs"
+      data-options="plain:true,border:false,selected:-1,fit:true">
+    </div>
+  </div>
+</div>
 </body>
 <script type="text/javascript" src="./js/jquery.min.js"></script>
 <script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="./js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript">
+  $(function () {
+    $('#tree').tree({
+        url:'tree_data.json',
+        onClick: function (node) {
+          //判断是否打开
+          var flag = $("#tabsID").tabs("exists", node.text);
+          if (!flag) {
+            //打开选项卡
+            $("#tabsID").tabs("add", {
+              "title": node.text,
+              "closable": true,
+              "content": node.text,
+            });
+          }
+
+        }
+      }
+    );
+  })
+</script>
 </html>
