@@ -5,9 +5,6 @@
   <title>SMS</title>
   <link rel="stylesheet" type="text/css" href="./css/easyui.css">
   <link rel="stylesheet" type="text/css" href="./css/icon.css">
-  <style>
-
-  </style>
 </head>
 <body>
 <div class="easyui-layout" data-options="fit:true">
@@ -75,8 +72,8 @@
 
   <form id="form" method="post" style="text-align: center">
     <div style="margin-top: 10px">
-      <label for="name">号码:</label>
-      <input class="easyui-validatebox" id="number" type="text" name="name" data-options="required:true,validType:['number','length[11,11]']"/>
+      <label for="number">号码:</label>
+      <input class="easyui-validatebox" id="number" type="number" name="name" data-options="required:true,validType:['number','length[11,11]']"/>
     </div>
     <div style="margin-top: 10px">
       <label for="email">邮箱:</label>
@@ -130,7 +127,6 @@
 
       }
     })
-
 
     // 登录窗口
     $('#btn').bind('click', function () {
