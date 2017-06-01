@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SMS</title>
+  <link rel="stylesheet" type="text/css" href="./css/easyui.css">
+  <link rel="stylesheet" type="text/css" href="./css/icon.css">
+  <style>
+
+  </style>
+</head>
+<body>
+<div class="easyui-layout" data-options="fit:true">
+  <div id="north" data-options="region:'north',title:'管理系统',collapsible:false" style="height: 100px; background: url('./images/bg.png');">
+    <h1 style="text-align: center;color: #fff">会员商城管理系统</h1>
+    <a id="btn" href="#" class="easyui-linkbutton" style="position: absolute;right: 10px;top: 40px;">用户登录</a>
+  </div>
+  <div data-options="region:'west',title:'菜单',collapsible:false" style="width: 150px">
+    <div class="easyui-accordion" data-options="fit:true">
+      <div title="权限管理" data-options="iconCls:'icon-file'">
+        <ul class="easyui-tree" data-options="lines:true">
+          <li>菜单管理</li>
+          <li>权限管理</li>
+          <li>角色管理</li>
+          <li>操作员管理</li>
+        </ul>
+      </div>
+      <div title="账户管理" data-options="iconCls:'icon-file'">
+        <ul class="easyui-tree" data-options="lines:true">
+          <li>账户信息</li>
+          <li>账户历史信息</li>
+        </ul>
+      </div>
+      <div title="用户管理" data-options="iconCls:'icon-file'">
+        <ul class="easyui-tree" data-options="lines:true">
+          <li>用户信息</li>
+        </ul>
+      </div>
+      <div title="支付管理" data-options="iconCls:'icon-file'">
+        <ul class="easyui-tree" data-options="lines:true">
+          <li>支付产品信息</li>
+          <li>用户支付信息</li>
+        </ul>
+      </div>
+      <div title="交易管理" data-options="iconCls:'icon-file'">
+        <ul class="easyui-tree" data-options="lines:true">
+          <li>支付订单管理</li>
+          <li>支付记录信息</li>
+        </ul>
+      </div>
+      <div title="结算管理" data-options="iconCls:'icon-file'">
+        <ul class="easyui-tree" data-options="lines:true">
+          <li>结算记录管理</li>
+        </ul>
+      </div>
+      <div title="对账管理" data-options="iconCls:'icon-file'">
+        <ul class="easyui-tree" data-options="lines:true">
+          <li>对账差错列表</li>
+          <li>对账批次列表</li>
+          <li>对账缓冲列表</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div data-options="region:'center',collapsible:false">
+    <div id="tabs" class="easyui-tabs" data-options="fit:true">
+      <div title="首页" style="padding:20px;">
+        欢迎来到，会员商城管理系统
+      </div>
+    </div>
+  </div>
+</div>
+// 登录
+<div id="win" class="easyui-window" title="登录" data-options="collapsible:false,minimizable:false,maximizable:false,closed:true,resizable:false,modal:true,inline:true" style="width:300px;height:200px">
+
+  <form id="form" method="post" style="text-align: center">
+    <div style="margin-top: 10px">
+      <label for="name">号码:</label>
+      <input class="easyui-validatebox" id="number" type="text" name="name" data-options="required:true,validType:['number','length[11,11]']"/>
+    </div>
+    <div style="margin-top: 10px">
+      <label for="email">邮箱:</label>
+      <input class="easyui-validatebox" id="email" type="text" name="email" data-options="required:true,validType:'email'"/>
+    </div>
+    <div style="margin-top: 10px">
+      <label for="pass">密码:</label>
+      <input class="easyui-validatebox" id="pass" type="text" name="pass" data-options="required:true,validType:['pass',length[6,11]]"/>
+    </div>
+    <div>
+      <a id="login" href="#" class="easyui-linkbutton" style="margin-top: 20px;width: 130px;position: relative;left: 15px">登录</a>
+    </div>
+  </form>
+</div>
+</body>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="./js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript">
+
+  //自定义规则:number
+  $.extend($.fn.validatebox.defaults.rules, {
+    number: {
+      validator: function(value){
+        //如果符合中文规则
+        if(/^(13|14|15|17|18)\d{9}$/i.test(value)){
+          return true;
+        }
+      },
+      message: '请输入正确的手机号码'
+    }
+  });
+
+  $(function () {
+    // 动态开发页面
+    $(".easyui-tree").tree({
+      onClick: function (node) {
+        // 判断是否是叶子节点
+        if ($(".easyui-tree").tree("isLeaf", node.target)) {
+          var flag = $("#tabs").tabs("exists", node.text);
+          // 判断是否打开
+          if (!flag) {
+            $("#tabs").tabs("add", {
+              title: node.text,
+              content: node.text,
+              closable: true
+            });
+          }
+
+        }
+
+      }
+    })
+
+
+    // 登录窗口
+    $('#btn').bind('click', function () {
+      $('#win').window('open');
+    });
+  })
+</script>
+</html>
