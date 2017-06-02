@@ -98,7 +98,6 @@
   $.extend($.fn.validatebox.defaults.rules, {
     number: {
       validator: function(value){
-        //如果符合中文规则
         if(/^(13|14|15|17|18)\d{9}$/i.test(value)){
           return true;
         }
