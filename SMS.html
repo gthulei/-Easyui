@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>SMS</title>
+  <title>管理系统</title>
   <link rel="stylesheet" type="text/css" href="./css/easyui.css">
   <link rel="stylesheet" type="text/css" href="./css/icon.css">
 </head>
@@ -13,11 +13,11 @@
     <a id="btn" href="#" class="easyui-linkbutton" style="position: absolute;right: 10px;top: 40px;">用户登录</a>
   </div>
   <div data-options="region:'west',title:'菜单',collapsible:false" style="width: 150px">
-    <div class="easyui-accordion" data-options="fit:true">
+    <div class="easyui-accordion" data-options="fit:true,selected:-1">
       <div title="权限管理" data-options="iconCls:'icon-file'">
-        <ul class="easyui-tree" data-options="lines:true">
-          <li>菜单管理</li>
-          <li>权限管理</li>
+        <ul id="tree" class="easyui-tree" data-options="lines:true">
+          <li data-options="attributes:{'url':'menu.html'}">菜单管理</li>
+          <li data-options="attributes:{'url':'authority.html'}">权限管理</li>
           <li>角色管理</li>
           <li>操作员管理</li>
         </ul>
@@ -70,10 +70,10 @@
 // 登录
 <div id="win" class="easyui-window" title="登录" data-options="collapsible:false,minimizable:false,maximizable:false,closed:true,resizable:false,modal:true,inline:true" style="width:300px;height:200px">
 
-  <form id="form" method="post" style="text-align: center">
+  <form id="form"  style="text-align: center">
     <div style="margin-top: 10px">
       <label for="number">号码:</label>
-      <input class="easyui-validatebox" id="number" type="number" name="name" data-options="required:true,validType:['number','length[11,11]']"/>
+      <input class="easyui-validatebox" id="number" type="tel" name="name" data-options="required:true,validType:['number','length[11,11]']" maxlength="11"/>
     </div>
     <div style="margin-top: 10px">
       <label for="email">邮箱:</label>
@@ -81,7 +81,7 @@
     </div>
     <div style="margin-top: 10px">
       <label for="pass">密码:</label>
-      <input class="easyui-validatebox" id="pass" type="text" name="pass" data-options="required:true,validType:['pass',length[6,11]]"/>
+      <input class="easyui-validatebox" id="pass" type="text" name="pass" data-options="required:true,validType:['pass',length[6,11]]" maxlength="11"/>
     </div>
     <div>
       <a id="login" href="#" class="easyui-linkbutton" style="margin-top: 20px;width: 130px;position: relative;left: 15px">登录</a>
@@ -109,17 +109,17 @@
 
   $(function () {
     // 动态开发页面
-    $(".easyui-tree").tree({
+    $("#tree").tree({
       onClick: function (node) {
         // 判断是否是叶子节点
-        if ($(".easyui-tree").tree("isLeaf", node.target)) {
+        if ($("#tree").tree("isLeaf", node.target)) {
           var flag = $("#tabs").tabs("exists", node.text);
           // 判断是否打开
           if (!flag) {
             $("#tabs").tabs("add", {
               title: node.text,
-              content: node.text,
-              closable: true
+              closable: true,
+              href: node.attributes.url
             });
           }
 
@@ -132,6 +132,17 @@
     $('#btn').bind('click', function () {
       $('#win').window('open');
     });
+  
+    //login
+    $("#login").bind("click",function () {
+      //有效性验证
+      if(!$('#form').form('validate')){
+        $.messager.alert('提示','请填合法的信息!');
+        return ;
+      }
+
+    })
+    
   })
 </script>
 </html>

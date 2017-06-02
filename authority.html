@@ -1,0 +1,49 @@
+<table id="authority" class="easyui-datagrid" data-options="collapsible:true,title:'权限管理',singleSelect:false,url:'list.json',pagination:true,pagePosition:'bottom',pageSize:20,method:'get',toolbar:toolbar,singleSelect:true">
+  <thead>
+  <tr>
+    <th data-options="field:'ck',checkbox:true"></th>
+    <th data-options="field:'id'">ID</th>
+    <th data-options="field:'name'">权限名称</th>
+    <th data-options="field:'identify'">权限标识</th>
+    <th data-options="field:'des'">描述</th>
+    <th data-options="field:'time'">创建时间</th>
+    <th data-options="field:'cz'">操作</th>
+  </tr>
+  </thead>
+</table>
+<script type="text/javascript">
+  var toolbar = [{
+    text: '添加权限',
+    iconCls: 'icon-add',
+    handler: function () {
+      var flag = $("#tabs").tabs("exists", this.text);
+      // 判断是否打开
+      if (!flag) {
+        $("#tabs").tabs("add", {
+          title: this.text,
+          closable: true,
+          href: "add-authority.html"
+        });
+      }
+    }
+  }, {
+    text: '删除',
+    iconCls: 'icon-remove',
+    handler: function () {
+      var data = $("#authority").datagrid("getSelections");
+      if (data.length == 0) {
+        $.messager.alert('提示', '未选中商品!');
+        return;
+      }
+      $.messager.confirm("确认", '是否删除ID为' + data[0].id + '的数据?', function (r) {
+        if (r) {
+          alert('ok');
+        }
+      });
+
+    }
+  }
+  ]
+
+
+</script>
